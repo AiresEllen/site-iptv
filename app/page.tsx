@@ -313,10 +313,8 @@ export default async function Home() {
           @media (max-width: 900px) {
             .site-page {
               min-height: 100vh;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              padding: 16px 0;
+              display: block;
+              padding: 16px 0 28px;
             }
 
             .site-container {
