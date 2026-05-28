@@ -200,7 +200,7 @@ export default async function PlanosPage() {
         @media (max-width: 900px) {
           .plans-page {
             min-height: 100vh;
-            padding: 18px 0;
+            padding: 16px 0;
           }
 
           .plans-container {
@@ -209,69 +209,69 @@ export default async function PlanosPage() {
           }
 
           .back-button {
-            font-size: 11px;
-            margin-bottom: 14px;
+            font-size: 10px;
+            margin-bottom: 10px;
           }
 
           .title {
-            font-size: 28px;
+            font-size: 24px;
           }
 
           .subtitle {
-            font-size: 11px;
-            margin-top: 8px;
+            font-size: 10px;
+            margin-top: 7px;
           }
 
           .plans-grid {
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 18px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 16px;
           }
 
           .plan-card {
-            border-radius: 18px;
-            padding: 14px;
-            min-height: auto;
+            border-radius: 16px;
+            padding: 10px;
+            min-height: 248px;
           }
 
           .plan-name {
-            font-size: 18px;
+            font-size: 11px;
           }
 
           .plan-price {
-            font-size: 30px;
-            margin: 12px 0 10px;
+            font-size: 20px;
+            margin: 10px 0 8px;
           }
 
           .plan-description {
-            font-size: 11px;
-            line-height: 1.45;
-            min-height: auto;
+            font-size: 7.5px;
+            line-height: 1.35;
+            min-height: 30px;
           }
 
           .features {
-            gap: 7px;
-            margin-top: 12px;
+            gap: 5px;
+            margin-top: 9px;
           }
 
           .feature {
-            border-radius: 10px;
-            padding: 8px 10px;
-            font-size: 10px;
+            border-radius: 8px;
+            padding: 6px;
+            font-size: 6.5px;
           }
 
           .button {
-            border-radius: 12px;
-            padding: 11px;
-            font-size: 10px;
-            margin-top: 14px;
+            border-radius: 10px;
+            padding: 9px 6px;
+            font-size: 7.5px;
+            margin-top: auto;
           }
 
           .empty-card {
-            margin-top: 18px;
-            border-radius: 18px;
-            padding: 16px;
-            font-size: 11px;
+            margin-top: 16px;
+            border-radius: 16px;
+            padding: 14px;
+            font-size: 10px;
           }
         }
       `}</style>
