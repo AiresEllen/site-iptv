@@ -1,65 +1,544 @@
-import Image from "next/image";
+import {
+  Headphones,
+  MessageCircle,
+  ShieldCheck,
+  Smartphone,
+  Tv,
+  X,
+} from "lucide-react";
 
-export default function Home() {
+async function getConfig() {
+  try {
+    const response = await fetch("http://localhost:3000/api/config", {
+      cache: "no-store",
+    });
+
+    const data = await response.json();
+
+    return {
+      brandName: data.config?.brandName || "Stream Prime",
+      heroTitle:
+        data.config?.heroTitle ||
+        "Seus conteúdos favoritos em qualquer dispositivo.",
+      heroDescription:
+        data.config?.heroDescription ||
+        "Compatível com Smart TV, Android, iPhone, TV Box, computador e tablet.",
+      logoUrl: data.config?.logoUrl || "",
+      bannerImageUrl: data.config?.bannerImageUrl || "",
+      whatsappNumber: data.config?.whatsappNumber || "5511999999999",
+      whatsappMessage:
+        data.config?.whatsappMessage ||
+        "Olá! Gostaria de saber mais sobre os planos.",
+    };
+  } catch {
+    return {
+      brandName: "Stream Prime",
+      heroTitle: "Seus conteúdos favoritos em qualquer dispositivo.",
+      heroDescription:
+        "Compatível com Smart TV, Android, iPhone, TV Box, computador e tablet.",
+      logoUrl: "",
+      bannerImageUrl: "",
+      whatsappNumber: "5511999999999",
+      whatsappMessage: "Olá! Gostaria de saber mais sobre os planos.",
+    };
+  }
+}
+
+function limparMensagem(message: string) {
+  const frase = "Olá! Gostaria de saber mais sobre os planos.";
+  return message.replace(`${frase}${frase}`, frase).trim();
+}
+
+export default async function Home() {
+  const config = await getConfig();
+
+  const whatsappLink = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(
+    limparMensagem(config.whatsappMessage),
+  )}`;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="site-page">
+      <style>
+        {`
+          * {
+            box-sizing: border-box;
+          }
+
+          html,
+          body {
+            margin: 0;
+            background: #020617;
+          }
+
+          .site-page {
+            min-height: 100vh;
+            background:
+              radial-gradient(circle at 82% 18%, rgba(16,185,129,0.16), transparent 34%),
+              #020617;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+          }
+
+          .site-container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 28px;
+          }
+
+          .site-header {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+          }
+
+          .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+
+          .brand-logo {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 8px;
+            flex-shrink: 0;
+          }
+
+          .brand-name {
+            font-size: 22px;
+            font-weight: 900;
+            white-space: nowrap;
+          }
+
+          .nav {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+            font-size: 14px;
+            font-weight: 800;
+          }
+
+          .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            white-space: nowrap;
+          }
+
+          .hero-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 54px;
+            align-items: center;
+            padding: 54px 0 30px;
+          }
+
+          .eyebrow {
+            color: #10b981;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 0 0 20px;
+          }
+
+          .hero-title {
+            font-size: 54px;
+            line-height: 1.08;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin: 0;
+            max-width: 540px;
+          }
+
+          .hero-description {
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.65;
+            margin: 22px 0 0;
+            max-width: 560px;
+          }
+
+          .button-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 28px;
+          }
+
+          .primary-button {
+            background: #10b981;
+            color: #020617;
+            border: none;
+            border-radius: 16px;
+            padding: 15px 24px;
+            font-size: 14px;
+            font-weight: 900;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+          }
+
+          .banner-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 28px;
+            padding: 18px;
+          }
+
+          .banner-box {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 22px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #07111f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .banner-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 18px;
+            display: block;
+          }
+
+          .fallback-banner {
+            width: 100%;
+            height: 100%;
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .device-section {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 26px;
+            padding: 22px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 0 0 28px;
+          }
+
+          .device-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+          }
+
+          .device-card h3 {
+            font-size: 18px;
+            margin: 0;
+          }
+
+          .device-card p {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.45;
+            margin: 6px 0 0;
+          }
+
+          .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(2,6,23,0.88);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .modal:target {
+            display: flex !important;
+          }
+
+          .modal-card {
+            width: 100%;
+            max-width: 460px;
+            border-radius: 28px;
+            background: #07111f;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 28px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+            position: relative;
+          }
+
+          .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            color: #fff;
+            text-decoration: none;
+          }
+
+          .modal-card h2 {
+            font-size: 30px;
+            margin: 18px 0 10px;
+          }
+
+          .modal-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+          }
+
+          .modal-button {
+            width: 100%;
+            justify-content: center;
+            margin-top: 24px;
+          }
+
+          @media (max-width: 900px) {
+            .site-page {
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 16px 0;
+            }
+
+            .site-container {
+              width: min(100%, 430px);
+              padding: 0 12px;
+              margin: 0 auto;
+            }
+
+            .site-header {
+              min-height: 44px;
+              gap: 8px;
+              align-items: center;
+            }
+
+            .brand {
+              gap: 7px;
+            }
+
+            .brand-logo {
+              width: 24px;
+              height: 24px;
+            }
+
+            .brand-name {
+              font-size: 14px;
+            }
+
+            .nav {
+              gap: 10px;
+              font-size: 10px;
+            }
+
+            .hero-grid {
+              grid-template-columns: 1fr 0.98fr;
+              gap: 10px;
+              padding: 18px 0 12px;
+            }
+
+            .eyebrow {
+              font-size: 9px;
+              letter-spacing: 1.4px;
+              line-height: 1.4;
+              margin-bottom: 10px;
+            }
+
+            .hero-title {
+              font-size: 29px;
+              line-height: 1.03;
+              letter-spacing: -1px;
+            }
+
+            .hero-description {
+              font-size: 10px;
+              line-height: 1.35;
+              margin-top: 10px;
+            }
+
+            .button-row {
+              margin-top: 12px;
+            }
+
+            .primary-button {
+              border-radius: 11px;
+              padding: 10px 12px;
+              font-size: 10px;
+              gap: 5px;
+            }
+
+            .primary-button svg {
+              width: 13px;
+              height: 13px;
+            }
+
+            .banner-card {
+              border-radius: 16px;
+              padding: 7px;
+            }
+
+            .banner-box {
+              aspect-ratio: 16 / 9;
+              border-radius: 12px;
+            }
+
+            .banner-image {
+              border-radius: 10px;
+            }
+
+            .device-section {
+              grid-template-columns: repeat(3, 1fr);
+              gap: 7px;
+              padding: 9px;
+              border-radius: 16px;
+              margin-bottom: 0;
+            }
+
+            .device-card {
+              gap: 5px;
+            }
+
+            .device-card svg {
+              width: 13px;
+              height: 13px;
+              flex-shrink: 0;
+            }
+
+            .device-card h3 {
+              font-size: 9px;
+            }
+
+            .device-card p {
+              font-size: 7px;
+              line-height: 1.3;
+              margin-top: 3px;
+            }
+          }
+        `}
+      </style>
+
+      <section>
+        <div className="site-container">
+          <header className="site-header">
+            <div className="brand">
+              {config.logoUrl ? (
+                <img
+                  src={config.logoUrl}
+                  alt={config.brandName}
+                  className="brand-logo"
+                />
+              ) : (
+                <Tv color="#10b981" size={40} />
+              )}
+
+              <strong className="brand-name">{config.brandName}</strong>
+            </div>
+
+            <nav className="nav">
+              <a href="/planos" target="_blank">
+                Planos
+              </a>
+              <a href="#dispositivos">Dispositivos</a>
+              <a
+                href="https://sistema.one/teste/gerar/69jxBSwk3jwfU"
+                target="_blank"
+              >
+                Teste Grátis
+              </a>
+            </nav>
+          </header>
+
+          <div className="hero-grid">
+            <div>
+              <p className="eyebrow">Plataforma moderna e suporte rápido</p>
+
+              <h1 className="hero-title">{config.heroTitle}</h1>
+
+              <p className="hero-description">{config.heroDescription}</p>
+
+              <div className="button-row">
+                <a href="#whatsapp-modal" className="primary-button">
+                  <MessageCircle size={22} />
+                  Falar com revendedor
+                </a>
+              </div>
+            </div>
+
+            <div className="banner-card">
+              <div className="banner-box">
+                {config.bannerImageUrl ? (
+                  <img
+                    src={config.bannerImageUrl}
+                    alt="Banner principal"
+                    className="banner-image"
+                  />
+                ) : (
+                  <div className="fallback-banner">
+                    <Tv color="#10b981" size={58} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <section id="dispositivos" className="device-section">
+            <div className="device-card">
+              <Headphones color="#10b981" size={36} />
+              <div>
+                <h3>Suporte rápido</h3>
+                <p>Atendimento direto com o revendedor.</p>
+              </div>
+            </div>
+
+            <div className="device-card">
+              <Smartphone color="#10b981" size={36} />
+              <div>
+                <h3>Android e iPhone</h3>
+                <p>Aplicativos otimizados e interface intuitiva.</p>
+              </div>
+            </div>
+
+            <div className="device-card">
+              <ShieldCheck color="#10b981" size={36} />
+              <div>
+                <h3>Seguro e estável</h3>
+                <p>Servidores de alta qualidade para melhor experiência.</p>
+              </div>
+            </div>
+          </section>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+      </section>
+
+      <div id="whatsapp-modal" className="modal">
+        <div className="modal-card">
+          <a href="#" className="modal-close">
+            <X size={24} />
           </a>
+
+          <MessageCircle color="#10b981" size={42} />
+
+          <h2>Fale com o revendedor</h2>
+
+          <p>Clique abaixo para abrir o WhatsApp e contate o revenda.</p>
+
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href={whatsappLink}
             target="_blank"
-            rel="noopener noreferrer"
+            className="primary-button modal-button"
           >
-            Documentation
+            <MessageCircle size={22} />
+            Abrir WhatsApp
           </a>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
