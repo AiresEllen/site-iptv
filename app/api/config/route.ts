@@ -31,7 +31,9 @@ export async function GET() {
       success: true,
       config,
     });
-  } catch {
+  } catch (error) {
+    console.error("ERRO_GET_CONFIG:", error);
+
     return NextResponse.json(
       {
         success: false,
@@ -80,7 +82,9 @@ export async function PUT(request: Request) {
       message: "Configurações atualizadas com sucesso!",
       config,
     });
-  } catch {
+  } catch (error) {
+    console.error("ERRO_PUT_CONFIG:", error);
+
     return NextResponse.json(
       {
         success: false,
