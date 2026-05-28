@@ -9,7 +9,12 @@ import {
 
 async function getConfig() {
   try {
-    const response = await fetch("http://localhost:3000/api/config", {
+    const baseUrl =
+      process.env.URL ||
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      "http://localhost:3000";
+
+    const response = await fetch(`${baseUrl}/api/config`, {
       cache: "no-store",
     });
 
@@ -29,6 +34,7 @@ async function getConfig() {
       whatsappMessage:
         data.config?.whatsappMessage ||
         "Olá! Gostaria de saber mais sobre os planos.",
+      trialUrl: data.config?.trialUrl || "",
     };
   } catch {
     return {
@@ -40,6 +46,7 @@ async function getConfig() {
       bannerImageUrl: "",
       whatsappNumber: "5511999999999",
       whatsappMessage: "Olá! Gostaria de saber mais sobre os planos.",
+      trialUrl: "",
     };
   }
 }
@@ -55,6 +62,9 @@ export default async function Home() {
   const whatsappLink = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(
     limparMensagem(config.whatsappMessage),
   )}`;
+
+  const trialLink =
+    config.trialUrl || "https://sistema.one/teste/gerar/69jxBSwk3jwfU";
 
   return (
     <main className="site-page">
@@ -447,10 +457,7 @@ export default async function Home() {
                 Planos
               </a>
               <a href="#dispositivos">Dispositivos</a>
-              <a
-                href="https://sistema.one/teste/gerar/69jxBSwk3jwfU"
-                target="_blank"
-              >
+              <a href={trialLink} target="_blank">
                 Teste Grátis
               </a>
             </nav>
@@ -527,7 +534,7 @@ export default async function Home() {
 
           <h2>Fale com o revendedor</h2>
 
-          <p>Clique abaixo para abrir o WhatsApp e contate o revenda.</p>
+          <p>Clique abaixo para abrir o WhatsApp e falar com o revendedor.</p>
 
           <a
             href={whatsappLink}
