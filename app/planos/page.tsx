@@ -37,11 +37,17 @@ async function getConfig() {
     return {
       brandName: data.config?.brandName || "Stream Prime",
       whatsappNumber: data.config?.whatsappNumber || "5511999999999",
+      primaryColor: data.config?.primaryColor || "#10b981",
+      backgroundColor: data.config?.backgroundColor || "#020617",
+      cardColor: data.config?.cardColor || "#07111f",
     };
   } catch {
     return {
       brandName: "Stream Prime",
       whatsappNumber: "5511999999999",
+      primaryColor: "#10b981",
+      backgroundColor: "#020617",
+      cardColor: "#07111f",
     };
   }
 }
@@ -61,7 +67,7 @@ export default async function PlanosPage() {
         body {
           margin: 0;
           padding: 0;
-          background: #020617;
+          background: ${config.backgroundColor};
           overflow-x: hidden;
           font-family: Arial, sans-serif;
         }
@@ -69,8 +75,8 @@ export default async function PlanosPage() {
         .plans-page {
           min-height: 100vh;
           background:
-            radial-gradient(circle at top right, rgba(16,185,129,0.15), transparent 30%),
-            #020617;
+            radial-gradient(circle at top right, color-mix(in srgb, ${config.primaryColor} 15%, transparent), transparent 30%),
+            ${config.backgroundColor};
           color: #ffffff;
           padding: 34px 24px 44px;
         }
@@ -85,7 +91,7 @@ export default async function PlanosPage() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: #10b981;
+          color: ${config.primaryColor};
           text-decoration: none;
           font-weight: 800;
           margin-bottom: 24px;
@@ -115,7 +121,7 @@ export default async function PlanosPage() {
         }
 
         .plan-card {
-          background: rgba(255,255,255,0.04);
+          background: ${config.cardColor};
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 24px;
           padding: 24px;
@@ -128,7 +134,7 @@ export default async function PlanosPage() {
 
         .plan-card:hover {
           transform: translateY(-3px);
-          border-color: rgba(16,185,129,0.4);
+          border-color: ${config.primaryColor};
         }
 
         .plan-name {
@@ -141,7 +147,7 @@ export default async function PlanosPage() {
           margin: 20px 0 16px;
           font-size: 42px;
           font-weight: 900;
-          color: #10b981;
+          color: ${config.primaryColor};
           line-height: 1;
         }
 
@@ -159,7 +165,7 @@ export default async function PlanosPage() {
         }
 
         .feature {
-          background: rgba(255,255,255,0.05);
+          background: rgba(255,255,255,0.08);
           border-radius: 14px;
           padding: 12px 14px;
           color: #ffffff;
@@ -172,8 +178,8 @@ export default async function PlanosPage() {
           align-items: center;
           width: 100%;
           margin-top: auto;
-          background: #10b981;
-          color: #020617;
+          background: ${config.primaryColor};
+          color: ${config.backgroundColor};
           border-radius: 16px;
           padding: 15px;
           text-decoration: none;
@@ -190,7 +196,7 @@ export default async function PlanosPage() {
         .empty-card {
           margin-top: 34px;
           border: 1px solid rgba(255,255,255,0.08);
-          background: rgba(255,255,255,0.04);
+          background: ${config.cardColor};
           border-radius: 24px;
           padding: 28px;
           color: #cbd5e1;
