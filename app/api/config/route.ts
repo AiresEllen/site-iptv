@@ -75,6 +75,10 @@ export async function PUT(request: Request) {
     config.whatsappMessage = body.whatsappMessage;
     config.trialUrl = body.trialUrl;
 
+    config.primaryColor = body.primaryColor || "#10b981";
+    config.backgroundColor = body.backgroundColor || "#020617";
+    config.cardColor = body.cardColor || "#07111f";
+
     await config.save();
 
     return NextResponse.json({

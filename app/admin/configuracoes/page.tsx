@@ -17,7 +17,6 @@ export default function ConfiguracoesPage() {
 
   const [logoUrl, setLogoUrl] = useState("");
   const [bannerImageUrl, setBannerImageUrl] = useState("");
-
   const [whatsappNumber, setWhatsappNumber] = useState("");
 
   const [whatsappMessage, setWhatsappMessage] = useState(
@@ -26,16 +25,17 @@ export default function ConfiguracoesPage() {
 
   const [trialUrl, setTrialUrl] = useState("");
 
+  const [primaryColor, setPrimaryColor] = useState("#10b981");
+  const [backgroundColor, setBackgroundColor] = useState("#020617");
+  const [cardColor, setCardColor] = useState("#07111f");
+
   const [saving, setSaving] = useState(false);
-
   const [uploadingLogo, setUploadingLogo] = useState(false);
-
   const [uploadingBanner, setUploadingBanner] = useState(false);
 
   useEffect(() => {
     async function loadConfig() {
       const response = await fetch("/api/config");
-
       const data = await response.json();
 
       if (data.success && data.config) {
@@ -52,9 +52,7 @@ export default function ConfiguracoesPage() {
         );
 
         setLogoUrl(data.config.logoUrl || "");
-
         setBannerImageUrl(data.config.bannerImageUrl || "");
-
         setWhatsappNumber(data.config.whatsappNumber || "");
 
         setWhatsappMessage(
@@ -63,6 +61,10 @@ export default function ConfiguracoesPage() {
         );
 
         setTrialUrl(data.config.trialUrl || "");
+
+        setPrimaryColor(data.config.primaryColor || "#10b981");
+        setBackgroundColor(data.config.backgroundColor || "#020617");
+        setCardColor(data.config.cardColor || "#07111f");
       }
     }
 
@@ -151,6 +153,9 @@ export default function ConfiguracoesPage() {
         whatsappNumber,
         whatsappMessage,
         trialUrl,
+        primaryColor,
+        backgroundColor,
+        cardColor,
       }),
     });
 
@@ -182,13 +187,10 @@ export default function ConfiguracoesPage() {
 
         .config-page {
           min-height: 100vh;
-
           background:
             radial-gradient(circle at 82% 18%, rgba(16,185,129,0.14), transparent 34%),
             #020617;
-
           color: #ffffff;
-
           padding: 34px 24px 44px;
         }
 
@@ -202,66 +204,47 @@ export default function ConfiguracoesPage() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-
           color: #10b981;
-
           text-decoration: none;
-
           font-weight: 900;
           font-size: 14px;
-
           margin-bottom: 18px;
         }
 
         .hero-card {
           background: rgba(255,255,255,0.04);
-
           border: 1px solid rgba(255,255,255,0.08);
-
           border-radius: 28px;
-
           padding: 30px;
-
           backdrop-filter: blur(12px);
-
           margin-bottom: 20px;
         }
 
         .hero-title {
           margin: 0;
-
           font-size: 38px;
           font-weight: 900;
         }
 
         .hero-description {
           margin-top: 10px;
-
           color: #cbd5e1;
-
           font-size: 15px;
         }
 
         .save-button {
           margin-top: 18px;
-
           border: none;
-
           background: #10b981;
           color: #020617;
-
           border-radius: 16px;
-
           padding: 15px 24px;
-
           font-size: 14px;
           font-weight: 900;
-
           display: inline-flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
-
           cursor: pointer;
         }
 
@@ -273,29 +256,22 @@ export default function ConfiguracoesPage() {
 
         .card {
           background: rgba(255,255,255,0.04);
-
           border: 1px solid rgba(255,255,255,0.08);
-
           border-radius: 28px;
-
           padding: 24px;
-
           backdrop-filter: blur(12px);
         }
 
         .card-title {
           margin-top: 0;
-
           font-size: 24px;
           font-weight: 900;
         }
 
         .label {
           display: block;
-
           margin-top: 18px;
           margin-bottom: 8px;
-
           font-size: 14px;
           font-weight: 900;
         }
@@ -303,19 +279,12 @@ export default function ConfiguracoesPage() {
         .input,
         .textarea {
           width: 100%;
-
           background: #020617;
-
           border: 1px solid rgba(255,255,255,0.10);
-
           border-radius: 16px;
-
           color: #ffffff;
-
           padding: 15px 16px;
-
           font-size: 14px;
-
           outline: none;
         }
 
@@ -328,81 +297,80 @@ export default function ConfiguracoesPage() {
           border-color: #10b981;
         }
 
+        .color-input {
+          width: 100%;
+          height: 52px;
+          background: #020617;
+          border: 1px solid rgba(255,255,255,0.10);
+          border-radius: 16px;
+          padding: 8px;
+          cursor: pointer;
+        }
+
         .upload-button {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-
           border: 1px solid #10b981;
-
           color: #10b981;
-
           border-radius: 14px;
-
           padding: 12px 18px;
-
           font-size: 13px;
           font-weight: 900;
-
           cursor: pointer;
         }
 
         .preview-box {
           width: 100%;
-
           aspect-ratio: 16 / 9;
-
           background: #020617;
-
           border: 1px solid rgba(255,255,255,0.10);
-
           border-radius: 24px;
-
           overflow: hidden;
-
           display: flex;
           align-items: center;
           justify-content: center;
-
           margin-bottom: 18px;
         }
 
         .preview-image {
           width: 100%;
           height: 100%;
-
           object-fit: contain;
         }
 
         .logo-preview {
           width: 100%;
           max-width: 180px;
-
           aspect-ratio: 1 / 1;
-
           background: #020617;
-
           border: 1px solid rgba(255,255,255,0.10);
-
           border-radius: 24px;
-
           overflow: hidden;
-
           display: flex;
           align-items: center;
           justify-content: center;
-
           margin-bottom: 18px;
         }
 
         .helper {
           color: #94a3b8;
-
           font-size: 12px;
-
           line-height: 1.5;
-
           word-break: break-all;
+        }
+
+        .color-preview {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+          margin-top: 14px;
+        }
+
+        .color-chip {
+          border-radius: 14px;
+          min-height: 54px;
+          border: 1px solid rgba(255,255,255,0.10);
         }
 
         @media (max-width: 900px) {
@@ -480,6 +448,12 @@ export default function ConfiguracoesPage() {
             font-size: 10px;
           }
 
+          .color-input {
+            height: 42px;
+            border-radius: 12px;
+            padding: 6px;
+          }
+
           .upload-button {
             border-radius: 11px;
             padding: 9px 12px;
@@ -507,7 +481,8 @@ export default function ConfiguracoesPage() {
           <h1 className="hero-title">Configurações do site</h1>
 
           <p className="hero-description">
-            Altere logo, banner, textos principais, teste grátis e WhatsApp.
+            Altere logo, banner, textos principais, teste grátis, cores e
+            WhatsApp.
           </p>
 
           <button
@@ -619,6 +594,49 @@ export default function ConfiguracoesPage() {
               className="input"
               placeholder="https://seudominio.com/teste"
             />
+
+            <h2 className="card-title" style={{ marginTop: 28 }}>
+              Cores do site
+            </h2>
+
+            <label className="label">Cor principal</label>
+
+            <input
+              type="color"
+              value={primaryColor}
+              onChange={(e) => setPrimaryColor(e.target.value)}
+              className="color-input"
+            />
+
+            <label className="label">Cor de fundo</label>
+
+            <input
+              type="color"
+              value={backgroundColor}
+              onChange={(e) => setBackgroundColor(e.target.value)}
+              className="color-input"
+            />
+
+            <label className="label">Cor dos cards</label>
+
+            <input
+              type="color"
+              value={cardColor}
+              onChange={(e) => setCardColor(e.target.value)}
+              className="color-input"
+            />
+
+            <div className="color-preview">
+              <div
+                className="color-chip"
+                style={{ background: primaryColor }}
+              />
+              <div
+                className="color-chip"
+                style={{ background: backgroundColor }}
+              />
+              <div className="color-chip" style={{ background: cardColor }} />
+            </div>
 
             <h2 className="card-title" style={{ marginTop: 28 }}>
               WhatsApp

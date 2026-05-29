@@ -35,6 +35,9 @@ async function getConfig() {
         data.config?.whatsappMessage ||
         "Olá! Gostaria de saber mais sobre os planos.",
       trialUrl: data.config?.trialUrl || "",
+      primaryColor: data.config?.primaryColor || "#10b981",
+      backgroundColor: data.config?.backgroundColor || "#020617",
+      cardColor: data.config?.cardColor || "#07111f",
     };
   } catch {
     return {
@@ -47,6 +50,9 @@ async function getConfig() {
       whatsappNumber: "5511999999999",
       whatsappMessage: "Olá! Gostaria de saber mais sobre os planos.",
       trialUrl: "",
+      primaryColor: "#10b981",
+      backgroundColor: "#020617",
+      cardColor: "#07111f",
     };
   }
 }
@@ -77,14 +83,14 @@ export default async function Home() {
           html,
           body {
             margin: 0;
-            background: #020617;
+            background: ${config.backgroundColor};
           }
 
           .site-page {
             min-height: 100vh;
             background:
-              radial-gradient(circle at 82% 18%, rgba(16,185,129,0.16), transparent 34%),
-              #020617;
+              radial-gradient(circle at 82% 18%, color-mix(in srgb, ${config.primaryColor} 16%, transparent), transparent 34%),
+              ${config.backgroundColor};
             color: #ffffff;
             font-family: Arial, sans-serif;
             overflow-x: hidden;
@@ -148,7 +154,7 @@ export default async function Home() {
           }
 
           .eyebrow {
-            color: #10b981;
+            color: ${config.primaryColor};
             font-size: 13px;
             font-weight: 900;
             letter-spacing: 3px;
@@ -180,8 +186,8 @@ export default async function Home() {
           }
 
           .primary-button {
-            background: #10b981;
-            color: #020617;
+            background: ${config.primaryColor};
+            color: ${config.backgroundColor};
             border: none;
             border-radius: 16px;
             padding: 15px 24px;
@@ -208,7 +214,7 @@ export default async function Home() {
             overflow: hidden;
             position: relative;
             border: 1px solid rgba(255,255,255,0.08);
-            background: #07111f;
+            background: ${config.cardColor};
             display: flex;
             align-items: center;
             justify-content: center;
@@ -279,7 +285,7 @@ export default async function Home() {
             width: 100%;
             max-width: 460px;
             border-radius: 28px;
-            background: #07111f;
+            background: ${config.cardColor};
             border: 1px solid rgba(255,255,255,0.12);
             padding: 28px;
             box-shadow: 0 30px 90px rgba(0,0,0,0.55);
@@ -449,7 +455,7 @@ export default async function Home() {
                   className="brand-logo"
                 />
               ) : (
-                <Tv color="#10b981" size={40} />
+                <Tv color={config.primaryColor} size={40} />
               )}
 
               <strong className="brand-name">{config.brandName}</strong>
@@ -492,7 +498,7 @@ export default async function Home() {
                   />
                 ) : (
                   <div className="fallback-banner">
-                    <Tv color="#10b981" size={58} />
+                    <Tv color={config.primaryColor} size={58} />
                   </div>
                 )}
               </div>
@@ -501,7 +507,7 @@ export default async function Home() {
 
           <section id="dispositivos" className="device-section">
             <div className="device-card">
-              <Headphones color="#10b981" size={36} />
+              <Headphones color={config.primaryColor} size={36} />
               <div>
                 <h3>Suporte rápido</h3>
                 <p>Atendimento direto com o revendedor.</p>
@@ -509,7 +515,7 @@ export default async function Home() {
             </div>
 
             <div className="device-card">
-              <Smartphone color="#10b981" size={36} />
+              <Smartphone color={config.primaryColor} size={36} />
               <div>
                 <h3>Android e iPhone</h3>
                 <p>Aplicativos otimizados e interface intuitiva.</p>
@@ -517,7 +523,7 @@ export default async function Home() {
             </div>
 
             <div className="device-card">
-              <ShieldCheck color="#10b981" size={36} />
+              <ShieldCheck color={config.primaryColor} size={36} />
               <div>
                 <h3>Seguro e estável</h3>
                 <p>Servidores de alta qualidade para melhor experiência.</p>
@@ -533,7 +539,7 @@ export default async function Home() {
             <X size={24} />
           </a>
 
-          <MessageCircle color="#10b981" size={42} />
+          <MessageCircle color={config.primaryColor} size={42} />
 
           <h2>Fale com o revendedor</h2>
 

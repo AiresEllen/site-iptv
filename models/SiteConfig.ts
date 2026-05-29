@@ -42,6 +42,21 @@ const SiteConfigSchema = new Schema(
       type: String,
       default: "",
     },
+
+    primaryColor: {
+      type: String,
+      default: "#10b981",
+    },
+
+    backgroundColor: {
+      type: String,
+      default: "#020617",
+    },
+
+    cardColor: {
+      type: String,
+      default: "#07111f",
+    },
   },
   {
     timestamps: true,
