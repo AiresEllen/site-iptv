@@ -314,18 +314,19 @@ export default async function Home() {
             .site-page {
               min-height: 100vh;
               display: block;
-              padding: 16px 0 28px;
+              padding: 18px 0 26px;
             }
 
             .site-container {
-              width: min(100%, 430px);
-              padding: 0 12px;
+              width: 100%;
+              max-width: 100%;
+              padding: 0 16px;
               margin: 0 auto;
             }
 
             .site-header {
-              min-height: 44px;
-              gap: 8px;
+              min-height: 50px;
+              gap: 10px;
               align-items: center;
             }
 
@@ -334,99 +335,103 @@ export default async function Home() {
             }
 
             .brand-logo {
-              width: 24px;
-              height: 24px;
+              width: 26px;
+              height: 26px;
             }
 
             .brand-name {
-              font-size: 14px;
+              font-size: 15px;
             }
 
             .nav {
-              gap: 10px;
+              gap: 11px;
               font-size: 10px;
             }
 
             .hero-grid {
-              grid-template-columns: 1fr 0.98fr;
-              gap: 10px;
-              padding: 18px 0 12px;
+              grid-template-columns: 1fr;
+              gap: 16px;
+              padding: 22px 0 14px;
             }
 
             .eyebrow {
-              font-size: 9px;
-              letter-spacing: 1.4px;
-              line-height: 1.4;
+              font-size: 10px;
+              letter-spacing: 1.6px;
+              line-height: 1.35;
               margin-bottom: 10px;
             }
 
             .hero-title {
-              font-size: 29px;
-              line-height: 1.03;
-              letter-spacing: -1px;
+              font-size: 42px;
+              line-height: 1.02;
+              letter-spacing: -1.2px;
+              max-width: 100%;
             }
 
             .hero-description {
-              font-size: 10px;
-              line-height: 1.35;
-              margin-top: 10px;
+              font-size: 15px;
+              line-height: 1.45;
+              margin-top: 14px;
+              max-width: 100%;
             }
 
             .button-row {
-              margin-top: 12px;
+              margin-top: 18px;
             }
 
             .primary-button {
-              border-radius: 11px;
-              padding: 10px 12px;
-              font-size: 10px;
-              gap: 5px;
+              border-radius: 15px;
+              padding: 15px 18px;
+              font-size: 14px;
+              gap: 8px;
             }
 
             .primary-button svg {
-              width: 13px;
-              height: 13px;
+              width: 18px;
+              height: 18px;
             }
 
             .banner-card {
-              border-radius: 16px;
-              padding: 7px;
+              border-radius: 20px;
+              padding: 8px;
             }
 
             .banner-box {
               aspect-ratio: 16 / 9;
-              border-radius: 12px;
+              border-radius: 16px;
             }
 
             .banner-image {
-              border-radius: 10px;
+              border-radius: 14px;
             }
 
             .device-section {
-              grid-template-columns: repeat(3, 1fr);
-              gap: 7px;
-              padding: 9px;
-              border-radius: 16px;
+              grid-template-columns: 1fr;
+              gap: 10px;
+              padding: 12px;
+              border-radius: 18px;
+              margin-top: 2px;
               margin-bottom: 0;
             }
 
             .device-card {
-              gap: 5px;
+              gap: 10px;
+              align-items: center;
             }
 
             .device-card svg {
-              width: 13px;
-              height: 13px;
+              width: 22px;
+              height: 22px;
               flex-shrink: 0;
             }
 
             .device-card h3 {
-              font-size: 9px;
+              font-size: 14px;
             }
 
             .device-card p {
-              font-size: 7px;
-              line-height: 1.3;
+              font-size: 11px;
+              line-height: 1.35;
               margin-top: 3px;
             }
           }
