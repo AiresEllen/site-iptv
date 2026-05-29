@@ -6,6 +6,7 @@ import {
   Tv,
   X,
 } from "lucide-react";
+import Link from "next/link";
 
 async function getConfig() {
   try {
@@ -462,10 +463,10 @@ export default async function Home() {
             </div>
 
             <nav className="nav">
-              <a href="/planos" target="_blank">
-                Planos
-              </a>
+              <Link href="/planos">Planos</Link>
+
               <a href="#dispositivos">Dispositivos</a>
+
               <a href={trialLink} target="_blank">
                 Teste Grátis
               </a>
